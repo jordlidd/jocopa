@@ -28,7 +28,8 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
-        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
+        flash[:notice] = 'Your listing has been created and will be reviewed for publishing shortly.'
+        format.html { redirect_to @listing }
         format.json { render :show, status: :created, location: @listing }
       else
         format.html { render :new }
