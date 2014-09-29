@@ -25,5 +25,10 @@
   <%= @listing.price %>
 </p>
 
+<p>
+  <strong>Images:</strong>
+  <%= @listing.listing_image.url %>
+</p>
+
 <%= link_to 'Edit', [:edit, @user, @listing] %> |
 
