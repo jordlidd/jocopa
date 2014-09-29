@@ -41,7 +41,7 @@ group :test, :development do
 end
 
 group :development do
-  gem "better_errors"
+  #gem "better_errors"
 end
 
 # Use ActiveModel has_secure_password
