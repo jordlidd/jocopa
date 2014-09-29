@@ -3,16 +3,15 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
 
-  # # GET /listings
-  # # GET /listings.json
-  # def index
-  #   @listings = Listing.all
-  # end
+  
+  def index
+    @listings = @user.listings
+  end
 
-  # # GET /listings/1
-  # # GET /listings/1.json
-  # def show
-  # end
+
+  def show
+
+  end
 
   # GET /listings/new
   def new
@@ -21,6 +20,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    @listing 
   end
 
   # POST /listings
