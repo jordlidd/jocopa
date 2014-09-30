@@ -1,13 +1,14 @@
 require 'spec_helper'
 
-feature "Creating Listings" do
+feature "View all listings" do
 
   before do
     FactoryGirl.create(:user, first_name: "John", last_name: "Doe", email: "john@doe.com", city: "Wawa")
 
     visit '/'
     click_link "Show"
-    click_link "Create New Listing"
+    click_link "See Listings"
+    click_link "New Listing"
   end
 
   scenario "Creating a new listing" do
@@ -19,10 +20,7 @@ feature "Creating Listings" do
 
     click_button "Create Listing"
 
-    expect(page).to have_content("Your listing has been created and will be reviewed for publishing shortly.")
-
-    within "#ticket #author" do
-      expect(page).to have_content("created by john@doe.com")
-    end
+    visit '/listings'
+    expect(page).to have_content("Example Listing John Doe")
   end
 end

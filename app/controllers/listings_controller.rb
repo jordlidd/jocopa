@@ -5,12 +5,14 @@ class ListingsController < ApplicationController
 
   
   def index
-    @listings = @user.listings
+    @listings = @user.listings 
   end
 
+  def showall
+    @listings = Listing.all
+  end
 
   def show
-
   end
 
   # GET /listings/new
@@ -20,7 +22,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
-    @listing 
+    
   end
 
   # POST /listings
@@ -60,14 +62,14 @@ class ListingsController < ApplicationController
   private
 
     def set_user
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:user_id]) if params[:user_id].present?
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "The user you were looking for could not be found."
       redirect_to root_path
     end
   
     def set_listing
-      @listing = @user.listings.find(params[:id])
+      @listing = @user.listings.find(params[:id]) 
     end
 
     def listing_params

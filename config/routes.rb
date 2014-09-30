@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
-
+  
   resources :users do
     resources :listings 
   end
 
+
+  get '/listings', to: 'listings#showall'  
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
