@@ -1,7 +1,7 @@
-<%= form_for [@user, @listing] do |f| %>
+<%= simple_form_for [@user, @listing] do |f| %>
   <% if @listing.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+      <h2>There's just <%= pluralize(@listing.errors.count, "error") %> that prohibited this listing from being saved:</h2>
 
       <ul>
       <% @listing.errors.full_messages.each do |message| %>
@@ -10,33 +10,19 @@
       </ul>
     </div>
   <% end %>
+  <%= f.error_notification %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :host %><br>
-    <%= f.text_field :host %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :listing_image %><br>
-    <%= f.file_field :listing_image %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :title, placeholder: 'Title of your listing' %>
+
+  <%= f.input :host, placeholder: 'Your name' %>
+
+  <%= f.input :description, placeholder: 'Describe your listings' %>
+
+  <%= f.input :location %>
+
+  <%= f.input :price %>
+
+  <%= f.input :listing_image, as: :file %>
+
+  <%= f.button :submit %>
 <% end %>

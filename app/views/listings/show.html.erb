@@ -31,4 +31,5 @@
 </p>
 
 <%= link_to 'Edit', [:edit, @user, @listing] %> |
+<%= link_to 'Destroy', user_listing_path(@user,@listing), method: :delete, data: { confirm: 'Are you sure?' } %>
 
