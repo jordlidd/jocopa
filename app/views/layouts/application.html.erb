@@ -11,7 +11,7 @@
     <ul>
       <li><%= link_to 'Sign Up', new_user_path %></li>
       <li><%= link_to 'Log In', signin_path %></li>
-      <li><%= link_to 'List Your Thing', 'new_user_listing_path(@user)' %></li>
+      <li><%= link_to 'List Your Thing', new_listing_path %></li>
     </ul>
   </nav>
 
@@ -23,6 +23,6 @@
 
 <%= yield %>
 
-<%= debug params %> 
+<%= debug params if Rails.env.development? %> 
 </body>
 </html>

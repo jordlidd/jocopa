@@ -5,6 +5,10 @@
   <%= @listing.title %>
 </p>
 
+<div id="listing">
+  <span id="author">Created by <%= @listing.user.email %></span>
+</div>
+
 <p>
   <strong>Host:</strong>
   <%= @listing.host %>
@@ -29,6 +33,7 @@
   <strong>Images:</strong>
   <%= @listing.listing_image.url %>
 </p>
+
 
 <%= link_to 'Edit', [:edit, @user, @listing] %> |
 <%= link_to 'Destroy', user_listing_path(@user,@listing), method: :delete, data: { confirm: 'Are you sure?' } %>

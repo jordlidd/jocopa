@@ -12,13 +12,14 @@ feature "Creating Listings" do
 
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
-    click_button "Sign in"
+    click_button "Sign In"
 
     click_link 'See Listings'
     click_link 'New Listing'
   end
 
   scenario "Creating a new listing" do
+
     fill_in "Title", with: "Example Listing"
     fill_in "Host", with: "John Doe"
     fill_in "Description", with: "An example listing, nothing more, nothing less. Used for testing purposes only."
@@ -29,8 +30,8 @@ feature "Creating Listings" do
 
     expect(page).to have_content("Your listing has been created and will be reviewed for publishing shortly.")
 
-    within "#ticket #author" do
-      expect(page).to have_content("created by #{user.email}")
+    within "#listing #author" do
+      expect(page).to have_content("Created by bruce@gotham.net")
     end
   end
 end
