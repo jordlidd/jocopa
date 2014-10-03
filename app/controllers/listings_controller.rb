@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_user
+  # before_action :require_signin!, except: [:show, :index]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
 
@@ -61,12 +62,29 @@ class ListingsController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:user_id]) if params[:user_id].present?
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The user you were looking for could not be found."
-      redirect_to root_path
+    # def require_signin!
+    #   if current_user.nil?
+    #     flash[:error] = "You need to log in or sign up before continuing."
+    #     redirect_to signin_url
+    #   end
+    # end
+
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
+    helper_method :current_user
+
+    def set_user
+      if params[:user_ids].present?
+        @user = User.find(params[:user_id]) 
+      else
+        redirect_to signin_url
+      end
+    end
+    # rescue ActiveRecord::RecordNotFound
+    #   flash[:alert] = "The user you were looking for could not be found."
+    #   redirect_to root_path
+    # end
   
     def set_listing
       @listing = @user.listings.find(params[:id]) 

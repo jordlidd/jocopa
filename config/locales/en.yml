@@ -1,7 +1,7 @@
 en:
   helpers:
     submit:
-      create: "Create a %{model}"
+      create: "Create %{model}"
       update: "Confirm changes to %{model}"
 
 

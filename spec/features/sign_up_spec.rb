@@ -9,7 +9,7 @@ feature 'Signing Up' do
     fill_in "Email", with: "user@example.com"
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
-    click_button "Sign Up"
+    click_button "Create User"
 
     expect(page).to have_content("Welcome! You're officially part of the team.")
   end

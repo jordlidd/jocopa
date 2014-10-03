@@ -3,11 +3,19 @@ require 'spec_helper'
 feature "Creating Listings" do
 
   before do
-    FactoryGirl.create(:user, first_name: "John", last_name: "Doe", email: "john@doe.com", city: "Wawa")
+    user = FactoryGirl.create(:user)
 
     visit '/'
-    click_link "Show"
-    click_link "Create New Listing"
+    click_link "List Your Thing"
+    message = "You need to log in or sign up before continuing."
+    expect(page).to have_content(message)
+
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+
+    click_link 'See Listings'
+    click_link 'New Listing'
   end
 
   scenario "Creating a new listing" do
@@ -22,7 +30,7 @@ feature "Creating Listings" do
     expect(page).to have_content("Your listing has been created and will be reviewed for publishing shortly.")
 
     within "#ticket #author" do
-      expect(page).to have_content("created by john@doe.com")
+      expect(page).to have_content("created by #{user.email}")
     end
   end
 end
