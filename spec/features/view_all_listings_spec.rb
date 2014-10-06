@@ -3,10 +3,13 @@ require 'spec_helper'
 feature "View all listings" do
 
   before do
-    FactoryGirl.create(:user, first_name: "John", last_name: "Doe", email: "john@doe.com", city: "Wawa")
-
+    user = FactoryGirl.create(:user)
+    
     visit '/'
-    click_link "Show"
+    click_link "Log In"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Sign In"
     click_link "See Listings"
     click_link "New Listing"
   end
@@ -18,9 +21,10 @@ feature "View all listings" do
     fill_in "Location", with: "Wawa"
     fill_in "Price", with: 25
 
+
     click_button "Create Listing"
 
     visit '/listings'
-    expect(page).to have_content("Example Listing John Doe")
+    expect(page).to have_content("Example Listing")
   end
 end

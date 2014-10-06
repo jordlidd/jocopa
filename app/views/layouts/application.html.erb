@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jocopa</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><%= link_to 'Sign Up', new_user_path %></li>
-      <li><%= link_to 'Log In', signin_path %></li>
-      <li><%= link_to 'List Your Thing', new_listing_path %></li>
-    </ul>
-  </nav>
+  <%= render 'layouts/header' %>
+ 
 
   <% flash.each do |key,value| %>
     <div class='flash' id='<%= key %>'>

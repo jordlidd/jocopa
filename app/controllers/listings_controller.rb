@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_user, except: :showall
-  before_action :require_signin!, except: [:show, :showall]
+  # before_action :require_signin!, except: [:show, :showall]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
 
@@ -63,21 +63,21 @@ class ListingsController < ApplicationController
 
   private
 
-    def require_signin!
-      if current_user.nil?
-        flash[:error] = "You need to log in or sign up before continuing."
-        redirect_to signin_url
-      end
-    end
+    # def require_signin!
+    #   if current_user.nil?
+    #     flash[:error] = "You need to log in or sign up before continuing."
+    #     redirect_to signin_url
+    #   end
+    # end
 
-    def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end
-    helper_method :current_user
+    # def current_user
+    #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    # end
+    # helper_method :current_user
 
     def set_user
-      if params[:user_id].present?
-        @user = User.find(params[:user_id]) 
+      if signed_in? 
+        @user = current_user 
       else
         flash[:error] = "You need to log in or sign up before continuing."
         redirect_to signin_url
