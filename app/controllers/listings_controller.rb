@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-  before_action :set_user, except: :showall
+  before_action :set_user, except: [:showall, :show]
+  # before_action :current_user, only: [:edit, :update, :destroy]
   # before_action :require_signin!, except: [:show, :showall]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
@@ -70,10 +71,10 @@ class ListingsController < ApplicationController
     #   end
     # end
 
-    # def current_user
-    #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    # end
-    # helper_method :current_user
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+    helper_method :current_user
 
     def set_user
       if signed_in? 
@@ -89,6 +90,7 @@ class ListingsController < ApplicationController
     # end
   
     def set_listing
+      @user = User.find(params[:user_id])
       @listing = @user.listings.find(params[:id]) 
     end
 

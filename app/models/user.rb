@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
   before_create :create_remember_token
+  before_save { self.email = email.downcase }
   has_secure_password
   validates :first_name, :last_name, :email, :password_confirmation, presence: true
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, format: { with: VALID_EMAIL_REGEX, on: :create }
   validates :email, :uniqueness => { :case_sensitive => false }
   
   has_many :listings, dependent: :destroy

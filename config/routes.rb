@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :listings, :only => :new
+  resources :listings, :only => [:new, :show]
   
   resources :users do
     resources :listings 
