@@ -10,7 +10,7 @@ module AuthenticationHelpers
 end
 
 # includes this module into all specs in the spec/features directory
-RSpec.configure do |c|
+Rspec.configure do |c|
   c.include AuthenticationHelpers, type: :feature
 end
 

@@ -7,8 +7,8 @@ FactoryGirl.define do
     password_confirmation "secret"
     city "Gotham"
 
-    factory :admin_user do
-      admin true
-    end
+    # factory :admin_user do
+    #   admin true
+    # end
   end
 end

@@ -17,6 +17,9 @@ feature 'signing out' do
 
         expect(page).to have_content('You are signed out')
         expect(page).to have_content("Listing listings")
+        expect(page).to_not have_link('Profile')
+        expect(page).to_not have_link('Sign out')
+        expect(page).to have_link('Log In') 
     end
 end
 

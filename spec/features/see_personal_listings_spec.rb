@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "see listing of another user" do
+feature "see personal listings" do
 
   before do
     user = FactoryGirl.create(:user)  
@@ -20,15 +20,13 @@ feature "see listing of another user" do
     fill_in "Price", with: 25
 
     click_button "Create Listing"
-    click_link 'Account'
-    click_link 'Sign out'
 
 
   end
 
-  scenario "Seeing listing details without being signed in" do
-    visit '/listings'
-    click_link 'Example Listing'
+  scenario "Seeing your listings on your profile page" do
+    click_link 'Account'
+    click_link 'Profile'
     expect(page).to have_content("Example Listing")
   end
 end

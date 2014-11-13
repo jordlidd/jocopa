@@ -3,25 +3,11 @@ class SessionsController < ApplicationController
   def new
   end
 
-
   def create
-    # user = User.where(email: params[:signin][:email]).first
-
-
-    # if user && user.authenticate(params[:signin][:password])
-
-    #   session[:user_id] = user.id
-    #   flash[:notice] = "Sign in successful."
-
-    #   redirect_to user_path(user)
-    # else
-    #   flash[:error] = "Sorry. We couldn't sign you in."
-    #   render :new
-    # end
-    user = User.find_by(email: params[:session][:email])
-    
+    user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:notice] = "Sign in successful."
       redirect_to user
     else
@@ -31,10 +17,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    log_out if signed_in?
     flash[:notice] = 'You are signed out'
-    redirect_to listings_path
+    redirect_to root_url
   end
-
-
 end

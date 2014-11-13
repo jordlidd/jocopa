@@ -16,13 +16,13 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= link_to listing.title, user_listing_path(listing.user_id, listing) %></td>
+        <td><%= link_to listing.title, :controller => "listings", :action => "show", :id => listing.id, :user_id => listing.user_id %></td>
         <td><%= listing.host %></td>
         <td><%= listing.description %></td>
         <td><%= listing.location %></td>
         <td><%= listing.price %></td>
         <td><%= image_tag listing.listing_image.url(:thumb) %></td>
-        <td><%= link_to 'Show', user_listing_path(listing.user_id, listing) %></td>
+        <!-- <td><%= link_to 'Show', user_listing_path(listing.user_id,listing) %></td> -->
       </tr>
     <% end %>
   </tbody>
